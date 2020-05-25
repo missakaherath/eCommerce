@@ -12,7 +12,9 @@ import android.widget.EditText;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,50 +46,50 @@ public class registerActivity extends AppCompatActivity {
             public void onClick(View view) {
                 createAccount();
             }
-            private void createAccount() {
-                String name = inputname.getText().toString();
-                String phone = inputphone.getText().toString();
-                String password = inputpassword.getText().toString();
 
-                if(TextUtils.isEmpty(name)){
-                    Toast.makeText(registerActivity.this, "Please enteryour name", Toast.LENGTH_SHORT).show();
-                }
-                else if (TextUtils.isEmpty(phone)){
-                    Toast.makeText(registerActivity.this, "Please enter your Pnone Number", Toast.LENGTH_SHORT).show();
-                }
-                else if (TextUtils.isEmpty(password)){
-                    Toast.makeText(registerActivity.this, "Please enter your Password", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    loadingBar.setTitle("Creating the account");
-                    loadingBar.setMessage("Please wait, we are checking the credentials");
-                    loadingBar.setCanceledOnTouchOutside(false);
-                    loadingBar.setProgressStyle(loadingBar.STYLE_SPINNER);
-                    loadingBar.show();
-                    
-                    validatePhoneNumber(name, phone, password);
-                }
-            }
         });
 
     }
+    private void createAccount() {
+        String name = inputname.getText().toString();
+        String phone = inputphone.getText().toString();
+        String password = inputpassword.getText().toString();
 
+        if(TextUtils.isEmpty(name)){
+            Toast.makeText(registerActivity.this, "Please enteryour name", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(phone)){
+            Toast.makeText(registerActivity.this, "Please enter your Pnone Number", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(password)){
+            Toast.makeText(registerActivity.this, "Please enter your Password", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            loadingBar.setTitle("Creating the account");
+            loadingBar.setMessage("Please wait, we are checking the credentials");
+            loadingBar.setCanceledOnTouchOutside(false);
+            loadingBar.setProgressStyle(loadingBar.STYLE_SPINNER);
+            loadingBar.show();
+
+            validatePhoneNumber(name, phone, password);
+        }
+    }
     private void validatePhoneNumber(final String name, final String phone, final String password) {
 
         final DatabaseReference RootRef;
         RootRef = FirebaseDatabase.getInstance().getReference();
 
-        ValueEventListener valueEventListener = new ValueEventListener() {
+        RootRef.addListenerForSingleValueEvent( new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Toast.makeText(registerActivity.this, "inside", Toast.LENGTH_SHORT).show();
+
                 if(!(dataSnapshot.child("Users").child(phone).exists())){
                     HashMap<String, Object> userdataMap = new HashMap<>();
                     userdataMap.put("phone", phone);
                     userdataMap.put("name", name);
                     userdataMap.put("password", password);
-
+//                    Toast.makeText(registerActivity.this, "inside again", Toast.LENGTH_SHORT).show();
                     RootRef.child("Users").child(phone).updateChildren(userdataMap)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
 
@@ -95,7 +97,6 @@ public class registerActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
                                         Toast.makeText(registerActivity.this,"Congratulations, your account has been created!", Toast.LENGTH_SHORT).show();
-
                                         loadingBar.dismiss();
 
                                         Intent intent = new Intent(registerActivity.this, loginActivity.class);
@@ -114,8 +115,9 @@ public class registerActivity extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                System.out.println("#########################3 "+databaseError.toString());
+                throw databaseError.toException();
             }
-        };
-        RootRef.addListenerForSingleValueEvent(valueEventListener);
+        });
     }
 }
