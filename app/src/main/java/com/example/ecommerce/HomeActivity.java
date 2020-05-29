@@ -1,6 +1,7 @@
 package com.example.ecommerce;
 
 import androidx.appcompat.app.AppCompatActivity;
+import io.paperdb.Paper;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ public class HomeActivity extends AppCompatActivity {
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Paper.book().destroy();
+
                 Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                 startActivity(intent);
             }
