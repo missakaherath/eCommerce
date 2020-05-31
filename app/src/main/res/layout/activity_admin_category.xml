@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity_admin_category">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add New Product"
+        android:textSize="35sp"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:id="@+id/tvAddNewProduct">
+    </TextView>
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/tvAddNewProduct"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/layout1stRow"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/ivtshirt"
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+            android:src="@drawable/tshirts"></ImageView>
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+            android:src="@drawable/sports"
+            android:id="@+id/ivsports"
+            >
+        </ImageView>
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+            android:src="@drawable/female_dresses"
+            android:id="@+id/ivfemale">
+        </ImageView>
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+            android:src="@drawable/sweather"
+            android:id="@+id/ivsweater">
+        </ImageView>
+    </LinearLayout>
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="40dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_below="@+id/layout1stRow"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/layout2ndRow"
+    android:orientation="horizontal"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/ivglass"
+        android:layout_width="70dp"
+        android:layout_height="80dp"
+        android:src="@drawable/glasses"></ImageView>
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="80dp"
+        android:src="@drawable/purses_bags"
+        android:id="@+id/ivpurse"
+        >
+    </ImageView>
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="80dp"
+        android:src="@drawable/hats"
+        android:id="@+id/ivhat">
+    </ImageView>
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="80dp"
+        android:src="@drawable/shoess"
+        android:id="@+id/ivshoe">
+    </ImageView>
+</LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/layout2ndRow"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/layout3rdRow"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/ivheadphones"
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+            android:src="@drawable/headphoness"></ImageView>
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+            android:src="@drawable/laptops"
+            android:id="@+id/ivlaptop"
+            >
+        </ImageView>
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+            android:src="@drawable/watches"
+            android:id="@+id/ivwatch">
+        </ImageView>
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+            android:src="@drawable/mobiles"
+            android:id="@+id/ivmobile">
+        </ImageView>
+    </LinearLayout>
+
+
+
+</RelativeLayout>
